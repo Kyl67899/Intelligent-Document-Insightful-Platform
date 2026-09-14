@@ -1,5 +1,19 @@
 <div align="center">
 
+# 📄 Intelligent Document Insightful Platform
+
+**Turn stacks of PDFs into searchable knowledge — instantly summarized, tagged, and ready for Q&A.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#-license)
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js-black)](#-tech-stack)
+[![Flask](https://img.shields.io/badge/Backend-Flask-000000?logo=flask)](#-tech-stack)
+[![Claude](https://img.shields.io/badge/LLM-Claude-6b5bff)](#-tech-stack)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing)
+
+[Problem](#-the-problem) • [Solution](#-the-solution) • [Tech Stack](#-tech-stack) • [Demo](#-demo) • [Getting Started](#-getting-started) • [Usage](#-how-to-use) • [Contributing](#-contributing) • [Roadmap](#-roadmap--future-features)
+
+</div>
+
 ---
 
 ## 🧩 The Problem
@@ -31,20 +45,20 @@ All of this sits behind secure, per-user authentication, so every account only e
 
 ## 🛠 Tech Stack
 
-| Layer                           | Technology                                                                                       |
-| ------------------------------- | ------------------------------------------------------------------------------------------------ |
-| **Frontend framework**    | [Next.js](https://nextjs.org/) (App Router, React 18)                                             |
-| **Styling**               | [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)-style primitives |
-| **UI components**         | [Material UI](https://mui.com/) (data-dense table/interactions)                                   |
-| **Animation**             | [Framer Motion](https://www.framer.com/motion/)                                                   |
-| **Backend framework**     | [Flask](https://flask.palletsprojects.com/) (Python)                                              |
-| **Auth**                  | JWT access tokens + server-side sessions, bcrypt password hashing                                |
-| **Database (relational)** | SQLAlchemy ORM — SQLite (dev) / PostgreSQL-ready (prod)                                         |
-| **Document parsing**      | [PyMuPDF](https://pymupdf.readthedocs.io/) + Tesseract OCR fallback                               |
-| **Vector database**       | [Chroma](https://www.trychroma.com/) (persisted locally)                                          |
-| **Embeddings**            | `sentence-transformers` (`all-MiniLM-L6-v2`)                                                 |
-| **LLM**                   | [Anthropic Claude](https://www.anthropic.com/) — summarization, insight extraction, QA           |
-| **File storage**          | Local disk (default) or S3-compatible cloud storage                                              |
+| Layer | Technology |
+|---|---|
+| **Frontend framework** | [Next.js](https://nextjs.org/) (App Router, React 18) |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)-style primitives |
+| **UI components** | [Material UI](https://mui.com/) (data-dense table/interactions) |
+| **Animation** | [Framer Motion](https://www.framer.com/motion/) |
+| **Backend framework** | [Flask](https://flask.palletsprojects.com/) (Python) |
+| **Auth** | JWT access tokens + server-side sessions, bcrypt password hashing |
+| **Database (relational)** | SQLAlchemy ORM — SQLite (dev) / PostgreSQL-ready (prod) |
+| **Document parsing** | [PyMuPDF](https://pymupdf.readthedocs.io/) + Tesseract OCR fallback |
+| **Vector database** | [Chroma](https://www.trychroma.com/) (persisted locally) |
+| **Embeddings** | `sentence-transformers` (`all-MiniLM-L6-v2`) |
+| **LLM** | [Anthropic Claude](https://www.anthropic.com/) — summarization, insight extraction, QA |
+| **File storage** | Local disk (default) or S3-compatible cloud storage |
 
 ---
 
@@ -53,6 +67,12 @@ All of this sits behind secure, per-user authentication, so every account only e
 > _Screenshots/GIF coming soon — contributions welcome! See [Contributing](#-contributing)._
 
 <div align="center">
+
+| Login | Dashboard | Q&A |
+|---|---|---|
+| ![login placeholder](docs/screenshots/login.png) | ![dashboard placeholder](docs/screenshots/dashboard.png) | ![qa placeholder](docs/screenshots/qa.png) |
+
+</div>
 
 **Typical flow:**
 
@@ -71,7 +91,7 @@ All of this sits behind secure, per-user authentication, so every account only e
 ### Prerequisites
 
 - Node.js 18+
-- Python 3.14+
+- Python 3.11+
 - An [Anthropic API key](https://console.anthropic.com/)
 - (Optional, for scanned PDFs) [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) on your `PATH`
 
@@ -127,14 +147,17 @@ Contributions of all sizes are welcome — bug fixes, new features, documentatio
 ### How to contribute
 
 1. **Fork** the repository and create your branch from `main`:
+
    ```bash
    git checkout -b feature/short-description
    ```
+
 2. **Make your changes.** Please:
    - Keep backend changes documented with clear docstrings/comments (see existing `services/` modules for the expected style).
    - Match the existing frontend patterns (Tailwind utility classes + shadcn-style components + MUI only where it's already used).
    - Add or update tests where applicable.
 3. **Run checks locally** before opening a PR:
+
    ```bash
    # backend
    cd backend && python -m py_compile app.py config.py models.py
@@ -142,6 +165,7 @@ Contributions of all sizes are welcome — bug fixes, new features, documentatio
    # frontend
    cd frontend && npm run lint
    ```
+
 4. **Commit using clear messages** (Conventional Commits encouraged, e.g. `feat: add PDF page thumbnails`, `fix: handle empty OCR text`).
 5. **Open a Pull Request** against `main`, describing:
    - What problem it solves / what it adds
@@ -150,7 +174,7 @@ Contributions of all sizes are welcome — bug fixes, new features, documentatio
 
 ### Good first issues
 
-Look for issues tagged [`good first issue`](<../../labels/good%20first%20issue>) or [`help wanted`](<../../labels/help%20wanted`>). Ideas that are always welcome:
+Look for issues tagged [`good first issue`](../../labels/good%20first%20issue) or [`help wanted`](../../labels/help%20wanted). Ideas that are always welcome:
 
 - Adding real demo screenshots/GIFs to `docs/screenshots/`
 - Writing unit/integration tests (backend `pytest`, frontend component tests)
