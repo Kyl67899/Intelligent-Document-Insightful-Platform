@@ -68,9 +68,9 @@ All of this sits behind secure, per-user authentication, so every account only e
 
 <div align="center">
 
-| Login | Dashboard | Q&A |
+| Demo of the IDIP (prototype)|
 |---|---|---|
-| ![login placeholder](docs/screenshots/login.png) | ![dashboard placeholder](docs/screenshots/dashboard.png) | ![qa placeholder](docs/screenshots/qa.png) |
+| https://github.com/user-attachments/assets/2ed91b32-d06a-4de5-990c-72bd07e111b5
 
 </div>
 
