@@ -30,6 +30,7 @@ backend (Flask, :5000)
 ```
 
 **Document pipeline** (runs on upload):
+
 1. File is saved (local `uploads/` folder by default, or S3).
 2. Text is extracted per page with PyMuPDF; pages with little/no
    embedded text fall back to Tesseract OCR on a rendered page image.
@@ -48,8 +49,7 @@ then asks Claude to answer using only the retrieved chunks as context.
 > **Note on scaling:** for simplicity this demo runs the whole pipeline
 > synchronously inside the upload request. For production, move
 > `_process_document()` in `documents/routes.py` onto a background task
-> queue (Celery/RQ + Redis) and have the frontend poll `GET
-> /api/documents/:id` for status, which the UI already does.
+> queue (Celery/RQ + Redis) and have the frontend poll `GET /api/documents/:id` for status, which the UI already does.
 
 ---
 
@@ -85,14 +85,14 @@ python app.py
 
 ### Key environment variables (`backend/.env`)
 
-| Variable | Purpose |
-|---|---|
-| `SECRET_KEY` / `JWT_SECRET_KEY` | Flask session signing / JWT signing (use different random strings) |
-| `DATABASE_URL` | SQLAlchemy URL; defaults to local SQLite, swap for Postgres in prod |
-| `FRONTEND_ORIGIN` | Allowed CORS origin for the Next.js app |
-| `STORAGE_BACKEND` | `local` (default) or `s3` |
-| `ANTHROPIC_API_KEY` / `LLM_MODEL` | LLM used for analysis + QA |
-| `CHROMA_PERSIST_DIR` / `EMBEDDING_MODEL` | Vector DB location + embedding model |
+| Variable                                     | Purpose                                                             |
+| -------------------------------------------- | ------------------------------------------------------------------- |
+| `SECRET_KEY` / `JWT_SECRET_KEY`          | Flask session signing / JWT signing (use different random strings)  |
+| `DATABASE_URL`                             | SQLAlchemy URL; defaults to local SQLite, swap for Postgres in prod |
+| `FRONTEND_ORIGIN`                          | Allowed CORS origin for the Next.js app                             |
+| `STORAGE_BACKEND`                          | `local` (default) or `s3`                                       |
+| `ANTHROPIC_API_KEY` / `LLM_MODEL`        | LLM used for analysis + QA                                          |
+| `CHROMA_PERSIST_DIR` / `EMBEDDING_MODEL` | Vector DB location + embedding model                                |
 
 See `backend/.env.example` for the full list with defaults.
 
@@ -138,19 +138,19 @@ All endpoints are prefixed with `/api`. Protected endpoints require
 `Authorization: Bearer <access_token>` **and** the session cookie set
 at login (the frontend's `axios` client already sends both).
 
-| Method | Path | Description |
-|---|---|---|
-| POST | `/api/auth/signup` | Create an account, returns user + access token |
-| POST | `/api/auth/login` | Log in, returns user + access token |
-| POST | `/api/auth/logout` | Clear the server-side session |
-| POST | `/api/auth/refresh` | Issue a new access token from the session cookie |
-| GET | `/api/auth/me` | Current authenticated user |
-| POST | `/api/documents/upload` | Multipart upload, field `files` (one or more PDFs) |
-| GET | `/api/documents` | List the current user's documents |
-| GET | `/api/documents/:id` | Get one document |
-| DELETE | `/api/documents/:id` | Delete a document + its vector data |
-| POST | `/api/qa/ask` | `{ document_id, question }` → grounded answer |
-| GET | `/api/health` | Health check |
+| Method | Path                      | Description                                         |
+| ------ | ------------------------- | --------------------------------------------------- |
+| POST   | `/api/auth/signup`      | Create an account, returns user + access token      |
+| POST   | `/api/auth/login`       | Log in, returns user + access token                 |
+| POST   | `/api/auth/logout`      | Clear the server-side session                       |
+| POST   | `/api/auth/refresh`     | Issue a new access token from the session cookie    |
+| GET    | `/api/auth/me`          | Current authenticated user                          |
+| POST   | `/api/documents/upload` | Multipart upload, field`files` (one or more PDFs) |
+| GET    | `/api/documents`        | List the current user's documents                   |
+| GET    | `/api/documents/:id`    | Get one document                                    |
+| DELETE | `/api/documents/:id`    | Delete a document + its vector data                 |
+| POST   | `/api/qa/ask`           | `{ document_id, question }` → grounded answer    |
+| GET    | `/api/health`           | Health check                                        |
 
 ---
 
